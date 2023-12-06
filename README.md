@@ -17,3 +17,11 @@ This repository contains reference docker-compose file for a variety of [nginx-p
 ```bash
 docker network create nginx-proxy
 ```
+
+## Links
+
+- [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy)
+- [acme-companion](https://github.com/nginx-proxy/acme-companion)
+- [Install Docker - Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04)
+- [Install Docker Compose - Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04)
+- [Docker Compose Releases](https://github.com/docker/compose/releases)

@@ -1,4 +1,4 @@
-FROM python:3.9.18-slim-bookworm
+FROM python:3.9.18-alpine
 WORKDIR /code
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
