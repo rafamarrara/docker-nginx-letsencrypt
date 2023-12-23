@@ -15,4 +15,4 @@ def hello():
 def p0c():
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=", flush=True)
     print(f"Request headers: {request.headers}", flush=True)
-    return 'Uk1hcnJhcmE='
+    return 'c3ViZG9tYWluIHRha2VvdmVyIC0geF9idWdodW50ZXI='
