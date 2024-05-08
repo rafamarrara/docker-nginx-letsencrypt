@@ -18,6 +18,24 @@ This repository contains reference docker-compose file for a variety of [nginx-p
 docker network create nginx-proxy
 ```
 
+## Useful commands
+
+```bash
+docker-compose up -d
+```
+
+```bash
+docker-compose down
+```
+
+```bash
+docker exec nginx-proxy-acme /app/cert_status
+```
+
+```bash
+docker-compose logs -f
+```
+
 ## Links
 
 - [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy)

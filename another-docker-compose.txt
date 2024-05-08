@@ -1,0 +1,73 @@
+version: '3'
+
+services:
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - conf:/etc/nginx/conf.d
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always
+
+  letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    environment:
+      - DEFAULT_EMAIL=email@yourdomain.com
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  app_xx1:
+    build: app_subdomain_takeover
+    container_name: app_xx1
+    expose:
+      - "5000"
+    volumes:
+      - ./app_subdomain_takeover:/code
+    environment:
+      - FLASK_ENV=development
+      - VIRTUAL_HOST=app1.domain.com
+      - VIRTUAL_PORT=5000
+      - LETSENCRYPT_HOST=app1.domain.com
+      - LETSENCRYPT_EMAIL=email@yourdomain.com
+      - REDIRECT_DOMAIN=www.domain.com
+    restart: always
+
+  app_xx2:
+    build: app_subdomain_takeover
+    container_name: app_xx2
+    expose:
+      - "5000"
+    volumes:
+      - ./app_subdomain_takeover:/code
+    environment:
+      - FLASK_ENV=development
+      - VIRTUAL_HOST=app2.domain.com
+      - VIRTUAL_PORT=5000
+      - LETSENCRYPT_HOST=app2.domain.com
+      - LETSENCRYPT_EMAIL=email@yourdomain.com
+      - REDIRECT_DOMAIN=domain.com
+    restart: always
+
+volumes:
+  conf:
+  vhost:
+  html:
+  dhparam:
+  certs:
+  acme:
+
+networks:
+  default:
+    name: nginx-proxy
+    external: true
